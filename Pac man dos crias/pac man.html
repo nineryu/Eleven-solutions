@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"> <!-- Define a codificação de caracteres como UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configura a viewport para dispositivos móveis -->
+    <title>Eleven solutions - Pac Mania</title> <!-- Título da página -->
+    <link rel="stylesheet" href="pac man.css"> <!-- Link para o arquivo CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet"> <!-- Link para a fonte Bungee do Google Fonts -->
+    <script src="https://kit.fontawesome.com/ca42bbbf84.js" crossorigin="anonymous"></script> <!-- Link para o Font Awesome -->
+</head>
+<body>
+    <!-- Botão para iniciar o jogo -->
+    <button id="play" 
+            onClick="document.getElementById('play').style.display = 'none'; 
+                      document.getElementById('h2bestScore').style.display = 'block'; 
+                      document.getElementById('footer').style.display = 'none'; 
+                      document.getElementById('mobile').style.display = 'none'">
+        Click here to play
+    </button>
+
+    <!-- Script que contém a lógica do jogo -->
+    <script src="Jogo.js" charset="utf-8"></script> 
+
+    <!-- Imagem do logo do Pac-Man -->
+    <img src="https://upload.wikimedia.org/wikipedia/fr/thumb/a/a2/Pac-Man_Logo.svg/langfr-1920px-Pac-Man_Logo.svg.png" 
+         alt="Logo Pac-Man" id="logo">
+
+    <!-- Exibe a pontuação atual -->
+    <h2>Score : <span id="score">0</span></h2>
+
+    <!-- Instruções para o jogador -->
+    <p id="computer">Use as setas <kbd>←</kbd> <kbd>↑</kbd> <kbd>→</kbd> <kbd>↓</kbd> para jogar</p>
+    <p id="mobile">Escolha Cima, Baixo, Esquerda ou Direita pra mover o Pac-Man</p>
+
+    <!-- Div para a grade do jogo -->
+    <div class="grid"></div>
+
+    <!-- Exibe a melhor pontuação do jogador -->
+    <h2 id="h2bestScore" style="display: none">Sua pontuação : <span id="bestScore">0</span></h2>
+
+    <!-- Rodapé da página -->
+    <footer id="footer">Jogo™  ©2024 Eleven Solutions Dev.</footer>
+</body>
+</html>
