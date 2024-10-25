@@ -1,0 +1,1359 @@
+/* Importa a fonte Poppins do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+/* Reseta margens, preenchimentos e define box-sizing para todos os elementos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none; /* Remove sublinhado de links */
+    border: none; /* Remove bordas padrão */
+    outline: none; /* Remove contorno padrão */
+    scroll-behavior: smooth; /* Habilita rolagem suave */
+    font-family: 'Poppins', sans-serif; /* Define a fonte padrão */
+}
+
+.scroll-animation {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+
+
+
+
+
+/* Define variáveis de cores para uso em todo o CSS */
+:root {
+    --bg-color: #312e2e; /* Cor de fundo padrão */
+    --text-color: #fffcfc; /* Cor do texto padrão */
+    --main-color: #670aaa; /* Cor principal */
+    --accent-color: #9370db; /* Cor de destaque */
+    --white-color: #ffffff; /* Cor branca */
+    --shadow-color: rgba(0, 0, 0, .2); /* Cor da sombra */
+    --highlight-color: #d4af37; /* Cor de destaque */
+}
+
+/* Estilo para a seleção de texto */
+*::selection {
+    background: var(--bg-color); /* Cor de fundo da seleção */
+    color: var(--bg-color); /* Cor do texto selecionado */
+}
+
+/* Estilos para o modo escuro */
+.dark-mode {
+    --bg-color: #0b061f; /* Cor de fundo no modo escuro */
+    --text-color: #fdfdfd; /* Cor do texto no modo escuro */
+    --shadow-color: rgba(0, 0, 0, .7); /* Sombra mais escura */
+}
+
+/* Define o tamanho da fonte base e oculta a rolagem horizontal */
+html {
+    font-size: 62.5%; /* Facilita o uso de rems */
+    overflow-x: hidden; /* Oculta a rolagem horizontal */
+    scroll-behavior: smooth;
+}
+
+/* Estilos do corpo da página */
+body {
+    background: var(--bg-color); /* Cor de fundo do corpo */
+    color: var(--text-color); /* Cor do texto do corpo */
+    transition: background-color 0.5s ease; /* Transição suave para a cor de fundo */
+    overflow-x: hidden; /* Oculta a rolagem horizontal */
+}
+
+/* Estilos do cabeçalho fixo */
+/* Estilização do cabeçalho */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem 7%;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    z-index: 100;
+    transition: .5s;
+    opacity: 0;
+    transform: translateY(-100%);
+    animation: slideDown 1s ease forwards;
+    
+}
+@keyframes slideDown {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.header.sticky {
+    background: var(--bg-color);
+    box-shadow: 0 .1rem 1rem var(--shadow-color);
+    padding: 1rem 7%;
+}
+/* Quando o cabeçalho se torna sticky */
+.header.sticky {
+    background: var(--bg-color);
+    box-shadow: 0 .1rem 1rem var(--shadow-color);
+    padding: 1rem 7%;
+    transform: translateY(0); /* Certifica-se de que o cabeçalho esteja na posição correta */
+    opacity: 1; /* Totalmente visível */
+}
+
+/* Logo da empresa */
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+/* Logo com efeito hover */
+.logo img {
+    width: 50px;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover img {
+    transform: scale(1.2);
+}
+
+.logo span {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--main-color);
+}
+
+/* Navbar à direita */
+.navbar {
+    margin-left: auto; /* Empurra a navbar para o lado direito */
+    display: flex;
+    gap: 7.5rem; /* Espaçamento entre os links */
+}
+
+.navbar a {
+    position: relative; /* Necessário para usar a pseudo-classe :after no link */
+    font-size: 1.3rem;
+    color: var(--white-color);
+    text-decoration: none; /* Remove sublinhado padrão */
+    transition: color 0.6s ease, transform 0.3s ease;
+}
+
+.navbar a:hover {
+    color: var(--main-color);
+    transform: scale(1.75);
+}
+
+/* Linha embaixo dos links no hover */
+.navbar a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: var(--main-color); /* Cor da linha */
+    bottom: -5px; /* Posiciona a linha abaixo do texto */
+    left: 0;
+    transition: width 0.3s ease; /* Animação de expansão da linha */
+}
+
+.navbar a:hover::after {
+    width: 100%; /* Expande a linha no hover */
+}
+
+
+
+/* Ícone de menu */
+#menu-icon img {
+    width: 50px;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+#menu-icon:hover img {
+    transform: scale(1.1);
+}
+
+/* Sticky: ajustes de comportamento ao rolar a página */
+.header.sticky .logo img, .header.sticky #menu-icon img {
+    transform: scale(0.9);
+}
+
+.header.sticky .navbar a {
+    color: var(--text-color);
+}
+#darkMode-icon {
+    font-size: 2.4rem;
+    color: var(--white-color);
+    cursor: pointer;
+}
+
+.header.sticky #darkMode-icon {
+    color: var(--text-color);
+    opacity: .9;
+}
+
+#menu-icon {
+    font-size: 3.6rem;
+    color: var(--text-color);
+    display: none;
+}
+
+/* Adicionando efeito de transição suave aos ícones do menu */
+#menu-icon, #darkMode-icon {
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+#menu-icon:hover, #darkMode-icon:hover {
+    color: var(--main-color);
+    transform: scale(1.1);
+}
+
+
+
+/* Estilos da seção */
+section {
+    min-height: 100vh; /* Altura mínima da seção */
+    padding: 10rem 7%; /* Preenchimento da seção */
+    background: var(--bg-gradient); /* Cor de fundo da seção */
+    background-attachment: fixed; /* Fixa a imagem de fundo */
+    background-size: cover; /* Tamanho da imagem de fundo */
+    background-position: center; /* Posiciona a imagem de fundo no centro */
+}
+
+/* Estilos da equipe */
+/* Estilos da equipe */
+.team {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 50px;
+}
+
+.team .heading {
+    font-size: 36px;
+    font-weight: bold;
+    color: var(--main-color);
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    margin: 50px;
+    width: 350px;
+    background-color: var(--shadow-color);
+    border: 1px solid var(--main-color);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: 0.5s all;
+}
+
+.card img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+    margin-bottom: 20px;
+    transition: 0.3s all ease;
+}
+
+.card h3 {
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.card h4 {
+    color: #0b061f;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.card .duration {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #a89ec9;
+}
+
+.card .duration ins {
+    margin-right: 5px;
+}
+
+/* Efeito de brilho e transição */
+.card:hover {
+    box-shadow: 0 4rem 8rem var(--shadow-color); /* Sombra mais pronunciada */
+    transform: translateY(-1rem); /* Movimento sutil */
+    box-shadow: 0 7px 50px 10px #000000aa; /* Brilho forte */
+    transform: scale(1.015);
+    filter: brightness(1.1);
+}
+
+.card::before {
+    position: fixed;
+    content: "";
+    box-shadow: 0 0 100px 40px #ffffff08;
+    top: -10%;
+    left: -100%;
+    transform: rotate(-45deg);
+    height: 60rem;
+    transition: 0.7s all;
+}
+
+.card:hover::before {
+    filter: brightness(0.5);
+    top: -100%;
+    left: 200%;
+}
+
+.social-links {
+    margin-top: 10px; /* Margem acima das redes sociais */
+    display: flex; /* Exibe ícones em linha */
+    justify-content: center; /* Centraliza os ícones */
+}
+
+.social-links a {
+    margin: 0 10px; /* Espaçamento entre os ícones */
+    color: var(--main-color); /* Cor dos ícones */
+    font-size: 24px; /* Tamanho dos ícones */
+    transition: color 0.3s ease; /* Transição suave de cor */
+}
+
+.social-links a:hover {
+    color: var(--highlight-color); /* Cor ao passar o mouse */
+}
+
+/* Carrossel */
+.swiper-container {
+    width: 100%;
+    height: 500px;
+}
+
+.swiper-slide {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.swiper-slide img {
+    width: 100%;
+    height: auto;
+}
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blink {
+    50% {
+        border-color: transparent;
+    }
+}
+
+.typing-effect {
+    display: inline-block;
+    border-right: 2px solid #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 16.5%; /* Permite a largura máxima conforme o conteúdo */
+    animation: typing 3s steps(30, end) forwards, blink 0.75s step-end infinite;
+}
+
+/* Estilos da home */
+.home {
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: relative;
+    justify-content:center;
+    align-items: center;
+    height: 150px;
+    background-color: #3a3a3a;
+    color: #ffffff;
+}
+
+.home .home-content {
+    position: relative;
+    z-index: 2;
+    max-width: 35rem;
+   
+    animation: fadeInUp 1s ease-in-out;
+}
+
+.home-content h3 {
+    font-size: 30px; /* Tamanho da fonte do título */
+    font-weight: 700; /* Peso da fonte */
+    line-height: 1.3; /* Espaçamento entre linhas */
+    display: inline-block; /* Exibe como bloco em linha */
+    margin-right: 20px; /* Margem à direita */
+}
+
+.home-content h1 {
+    font-size: 52px; /* Tamanho da fonte do subtítulo */
+    font-weight: 700; /* Peso da fonte */
+    margin-bottom: 0; /* Margem abaixo */
+    display: inline-block; /* Exibe como bloco em linha */
+    vertical-align: middle; /* Alinha verticalmente ao meio */
+    display: inline-block;
+    animation: bounce 1.5s infinite ease-in-out;
+}
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+.home-content p {
+    font-size: 1.4rem; /* Tamanho da fonte do texto */
+}
+
+.home-content .social-media a {
+    display: inline-flex; /* Exibe como flex em linha */
+    justify-content: center; /* Alinha itens horizontalmente ao centro */
+    align-items: center; /* Alinha itens verticalmente ao centro */
+    width: 4rem; /* Largura do link */
+    height: 4rem; /* Altura do link */
+    background: transparent; /* Cor de fundo transparente */
+    border: .2rem solid var(--main-color); /* Borda do link */
+    border-radius: 50%; /* Arredonda o link */
+    box-shadow: 0 .2rem .5rem var(--shadow-color); /* Sombra do link */
+    font-size: 2rem; /* Tamanho da fonte do link */
+    color: var(--main-color); /* Cor do link */
+    margin: 2.5rem 1.5rem 3rem 0; /* Margem ao redor do link */
+    transition: .5s ease; /* Transição suave */
+}
+
+.home-content .social-media a:hover {
+    background: var(--main-color); /* Cor de fundo do link ao passar o mouse */
+    color: var(--white-color); /* Cor do link ao passar o mouse */
+}
+
+.btn {
+    display: inline-block; /* Exibe como bloco em linha */
+    padding: 1.2rem 2.8rem; /* Preenchimento do botão */
+    background: var(--main-color); /* Cor de fundo do botão */
+    border-radius: .6rem; /* Arredonda o botão */
+    box-shadow: 0 .2rem .5rem var(--shadow-color); /* Sombra do botão */
+    font-size: 1.6rem; /* Tamanho da fonte do botão */
+    color: var(--white-color); /* Cor do botão */
+    letter-spacing: .1rem; /* Espaçamento entre letras */
+    font-weight: 600; /* Peso da fonte */
+    border: .2rem solid transparent; /* Borda transparente */
+    transition: .5s ease; /* Transição suave */
+}
+
+.btn:hover {
+    background: transparent; /* Cor de fundo transparente ao passar o mouse */
+    color: var(--main-color); /* Cor do botão ao passar o mouse */
+    border-color: var(--main-color); /* Cor da borda ao passar o mouse */
+    box-shadow: 0 .5rem 1rem var(--shadow-color); /* Sombra do box ao passar o mouse */
+    transform: translateY(-1rem); /* Efeito de movimento */
+}
+
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+@keyframes professionRotate {
+    0%, 20% {
+        transform: rotate(0deg); /* Inicia a rotação */
+    }
+
+    25%, 45% {
+        transform: rotate(-90deg); /* Rotação de 90 graus */
+    }
+
+    50%, 70% {
+        transform: rotate(-180deg); /* Rota ção de 180 graus */
+    }
+
+    75%, 95% {
+        transform: rotate(-270deg); /* Rotação de 270 graus */
+    }
+
+    100% {
+        transform: rotate(-360deg); /* Rotação de 360 graus */
+    }
+}
+
+.home .profession-box .profession {
+    position: absolute; /* Posicionamento absoluto */
+    left: 0; /* Posiciona à esquerda */
+    display: flex; /* Usando flexbox para layout */
+    align-items: center; /* Alinha itens verticalmente ao centro */
+    flex-direction: column; /* Direção da flexbox */
+    color: var(--main-color); /* Cor do texto */
+    transform: rotate(calc(360deg / 4 * var(--i))); /* Rotação do texto */
+    transform-origin: 384px; /* Origem da transformação */
+    background: var(--bg-color); /* Cor de fundo do texto */
+    padding: 13px 0; /* Preenchimento do texto */
+}
+
+.home .profession-box .profession:nth-child(1) i {
+    margin-right: 15px; /* Margem à direita do ícone */
+}
+
+.home .profession-box .profession:nth-child(2), .home .profession-box .profession:nth-child(4) {
+    padding-bottom: 20px; /* Preenchimento abaixo do texto */
+}
+
+.home .profession i {
+    font-size: 3.8rem; /* Tamanho da fonte do ícone */
+}
+
+.home .profession h3 {
+    font-size: 3.2rem; /* Tamanho da fonte do título */
+    line-height: 1; /* Espaçamento entre linhas */
+    font-weight: 600; /* Peso da fonte */
+}
+
+.home .profession-box .circle {
+    width: 560px; /* Largura do círculo */
+    height: 560px; /* Altura do círculo */
+    border: 3px solid var(--main-color); /* Borda do círculo */
+    border-radius: 50%; /* Arredonda o círculo */
+    z-index: -1; /* Coloca abaixo de outros elementos */
+}
+
+.home .profession-container .overlay {
+    position: absolute; /* Posicionamento absoluto */
+    top: 0; /* Posiciona no topo */
+    right: 0; /* Posiciona à direita */
+    width: 0; /* Largura do overlay */
+    height: 0; /* Altura do overlay */
+    border-top: 50vh solid var(--main-color); /* Borda superior do overlay */
+    border-right: 384px solid var(--main-color); /* Borda direita do overlay */
+    border-bottom: 50vh solid var(--main-color); /* Borda inferior do overlay */
+    border-left: 384px solid transparent; /* Borda esquerda do overlay */
+}
+
+.home-img img {
+    position: absolute; /* Posicionamento absoluto */
+    bottom: 0; /* Posiciona na parte inferior */
+    right: 40px; /* Posiciona à direita */
+    pointer-events: none; /* Desativa eventos de ponteiro */
+    max-width: 480px; /* Largura máxima da imagem */
+    max-height: 100vh; /* Altura máxima da imagem */
+}
+
+.carousel-container {
+    position: relative; /* Posicionamento relativo */
+    width: 80%; /* Largura do container */
+    max-width: 800px; /* Largura máxima do container */
+    overflow: hidden; /* Oculta o conteúdo excedente */
+    border-radius: 10px; /* Arredonda o container */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .3); /* Sombra do container */
+}
+
+/* Ajustes gerais da home */
+.home {
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    background-color: #3a3a3a;
+    color: #ffffff;
+    padding: 20px;
+}
+
+/* Conteúdo da home */
+.home .home-content {
+    max-width: 35rem;
+    z-index: 2;
+}
+/* Ícones de redes sociais */
+.social-media {
+    display: flex;
+    gap: 15px;
+}
+
+.social-media a {
+    font-size: 1.8rem;
+    color: #ffffff;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-media a:hover {
+    color: #00acee;
+    transform: scale(1.2);
+}
+
+.fab {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+}
+
+/* Estilo do carrossel */
+.carousel {
+    position: absolute;
+    right: 0;
+    top: 10%;
+    max-width: 50%;
+    width: 50vw;
+    height: 80vh;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    margin-right: 20px;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3));
+}
+
+/* Imagens com efeito de parallax */
+/* Estilo do carrossel */
+.carousel {
+    position: absolute;
+    right: 0;
+    top: 10%;
+    max-width: 50%;
+    width: 50vw;
+    height: 80vh;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    margin-right: 20px;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3));
+}
+
+/* Imagens com efeito de parallax */
+.carousel-images {
+    display: flex;
+    transition: transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+    height: 100%;
+    width: 100%; /* Ajusta a largura para três imagens */
+}
+
+.carousel-images img {
+    min-width: 100%; /* Faz com que cada imagem ocupe o tamanho completo do container do carrossel */
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+    transition: filter 0.3s ease;
+}
+
+.carousel-images img:hover {
+    transform: scale(1.05); /* Zoom leve na imagem ao passar o mouse */
+    filter: brightness(1.1);
+}
+
+/* Botões do carrossel */
+button.prev, button.next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.6);
+    color: #333;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    padding: 12px 20px;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 2rem;
+    z-index: 3;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+button.prev {
+    left: 20px;
+}
+
+button.next {
+    right: 20px;
+}
+
+/* Animação nos botões */
+button.prev:hover, button.next:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+    transform: scale(1.2);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Botões de navegação aprimorados */
+.nav-manual .manual-btn,
+.nav-auto div {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.nav-manual .manual-btn:hover,
+.nav-auto div:hover {
+    background-color: #fff;
+    transform: scale(1.2);
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8);
+}
+
+/* Transição entre slides */
+.slider-box {
+    width: 100%;
+    height: auto;
+    position: relative;
+    text-align: center;
+    transition: all 1.2s ease-in-out;
+}
+
+/* Animação de entrada dos textos */
+div.slider-text h1 {
+    font-size: 3.5rem;
+    margin-left: 20px;
+    color: #fff;
+    text-shadow: 2px 2px 10px black;
+    animation: slideInLeft 1s ease-out forwards;
+    opacity: 0;
+}
+
+@keyframes slideInLeft {
+    0% {
+        transform: translateX(-50%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Animação de fade nos textos */
+div.slider-text p {
+    margin-top: 10px;
+    line-height: 1.6;
+    text-align: justify;
+    font-size: 1.2rem;
+    color: #eee;
+    text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    animation: fadeIn 1.2s ease-out forwards;
+    animation-delay: 0.5s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+span {
+    color: var(--main-color); /* Cor do texto */
+}
+
+.about {
+    display: flex; /* Usando flexbox para layout */
+    justify-content: center; /* Alinha itens horizontalmente ao centro */
+    align-items: center; /* Alinha itens verticalmente ao centro */
+    gap: 4rem; /* Espaçamento entre itens */
+}
+
+.about-img img {
+    width: 25vw; /* Largura da imagem */
+    height: 30vw; /* Altura da imagem */
+    position: relative; /* Posicionamento relativo */
+    padding: 6%; /* Preenchimento da imagem */
+    margin-left: 4%; /* Margem à esquerda da imagem */
+    animation: float 3s ease-in-out infinite; /* Animação suave de flutuação */
+    transition: transform 0.3s ease-in-out; /* Transição suave no hover */
+}
+
+
+@keyframes float {
+    0% {
+        transform: translateY(0); /* Ponto inicial */
+    }
+    50% {
+        transform: translateY(-10px); /* Movimenta para cima */
+    }
+    100% {
+        transform: translateY(0); /* Volta ao ponto inicial */
+    }
+}
+.about-img img:hover {
+    
+    transform: scale(1.05); /* Aumenta levemente a imagem */
+}
+
+.heading {
+    font-size: 3.5rem; /* Tamanho da fonte do título */
+    text-align: center; /* Alinha o título ao centro */
+}
+
+.about-content h2 {
+    text-align: left; /* Alinha o subtítulo à esquerda */
+    line-height: 1.2; /* Espaçamento entre linhas */
+}
+
+.about-content h3 {
+    font-size: 4rem; /* Tamanho da fonte do subtítulo */
+}
+
+.about-content p {
+    font-size: 2.5rem; /* Tamanho da fonte do texto */
+    margin: 3rem 0 3rem; /* Margem ao redor do texto */
+}
+
+.services {
+    min-height: auto; /* Altura mínima */
+    padding-bottom: 10rem; /* Preenchimento abaixo */
+}
+
+.services h2 {
+    margin-bottom: 5rem; /* Margem abaixo do título */
+}
+
+.services .services-container {
+    display: flex; /* Usando flexbox para layout */
+    justify-content: center; /* Alinha itens horizontalmente ao centro */
+    align-items: center; /* Alinha itens verticalmente ao centro */
+    flex-wrap: wrap; /* Quebra de linha */
+    gap: 2rem; /* Espaçamento entre itens */
+}
+
+.services-container .services-box {
+    flex: 1 1 30rem; /* Tamanho do box */
+    background: var(--bg-color); /* Cor de fundo do box */
+    padding: 3rem 2rem 4rem; /* Preenchimento do box */
+    border-radius: 2rem; /* Arredonda o box */
+    box-shadow: 0 .1rem .5rem var(--shadow-color); /* Sombra do box */
+    text-align: center; /* Alinha o texto ao centro */
+    border-top: .6rem solid var(--main-color); /* Borda superior do box */
+    border-bottom: .6rem solid var(--main-color); /* Borda inferior do box */
+    transition: .5s ease; /* Transição suave */
+}
+
+.services-container .services-box:hover {
+    box-shadow: 0 .5rem 1rem var(--shadow-color); /* Sombra do box ao passar o mouse */
+    transform: translateY(-1rem); /* Efeito de movimento */
+}
+
+.services-container .services-box i {
+    font-size: 3.5rem; /* Tamanho da fonte do ícone */
+    color: var(--main-color); /* Cor do ícone */
+    margin-bottom: 2rem; /* Margem abaixo do ícone */
+}
+
+.services-container .services-box h3 {
+    font-size: 2.2rem; /* Tamanho da fonte do título */
+    margin-bottom: 1.5rem; /* Margem abaixo do título */
+}
+
+.services-container .services-box p {
+    font-size: 1.5rem; /* Tamanho da fonte do texto */
+}
+
+.portfolio .portfolio-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(28rem, 1fr));
+    gap: 2.5rem;
+    padding: 2rem;
+}
+
+.portfolio .portfolio-container .portfolio-box {
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 .1rem .5rem var(--shadow-color);
+    border: .6rem solid var(--main-color);
+    transition: .5s ease;
+}
+
+.portfolio .portfolio-container .portfolio-box img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    aspect-ratio: 16 / 9; /* Proporção para uniformizar as imagens */
+    transition: .4s ease;
+}
+
+.portfolio .portfolio-container .portfolio-box:hover img {
+    transform: scale(1.1);
+}
+
+.portfolio .portfolio-container .portfolio-box .portfolio-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: .5s ease;
+}
+
+.portfolio .portfolio-container .portfolio-box:hover .portfolio-layer {
+    opacity: 1;
+    visibility: visible;
+}
+
+.portfolio .portfolio-container .portfolio-box .portfolio-layer h4 {
+    font-size: 2.2rem;
+    color: var(--white-color);
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.portfolio .portfolio-container .portfolio-box .portfolio-layer p {
+    font-size: 1.5rem;
+    color: var(--white-color);
+    margin-bottom: 2rem;
+}
+
+.portfolio .portfolio-container .portfolio-box .portfolio-layer a {
+    font-size: 1.6rem;
+    color: var(--main-color);
+    border: .2rem solid var(--main-color);
+    padding: 1rem 2.5rem;
+    border-radius: .5rem;
+    transition: .5s ease;
+}
+
+.portfolio .portfolio-container .portfolio-box .portfolio-layer a:hover {
+    background: var(--main-color);
+    color: var(--white-color);
+}
+
+/* Estilos do botão "Jogar Agora" */
+.play-btn {
+    color: var(--main-color);
+    border: .2rem solid var(--main-color);
+}
+
+.play-btn:hover {
+    background: var(--main-color);
+    color: var(--white-color);
+}
+
+/* Estilos do botão "Mais Informações" */
+.info-btn {
+    color: var(--white-color);
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    margin-top: 1rem;
+    transition: background 0.5s ease, transform 0.5s ease;
+}
+
+.info-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.contact .contact-form {
+    margin: 4rem auto; /* Margem ao redor do formulário */
+    max-width: 78rem; /* Largura máxima do formulário */
+    border-radius: 1rem; /* Arredonda o formulário */
+    background: var(--bg-color); /* Cor de fundo do formulário */
+    box-shadow: 0 .5rem 1rem var(--shadow-color); /* Sombra do formulário */
+    padding: 4rem 3rem; /* Preenchimento do formulário */
+}
+
+.contact-form h3 {
+    font-size: 2.5rem; /* Tamanho da fonte do título */
+    font-weight: 600; /* Peso da fonte */
+    margin-bottom: 2rem; /* Margem abaixo do título */
+}
+
+.contact-form .input-box {
+    position: relative; /* Posicionamento relativo */
+    width: 100%; /* Largura total */
+    margin-top: 2.5rem; /* Margem acima do input */
+}
+
+.contact-form .input-box input, .contact-form .input-box textarea {
+    width: 100%; /* Largura total */
+    background: transparent; /* Cor de fundo transparente */
+    border-bottom: .2rem solid var(--main-color); /* Borda inferior do input */
+    font-size: 1.6rem; /* Tamanho da fonte do input */
+    padding: 1rem 0; /* Preenchimento do input */
+    color: var(--text-color); /* Cor do input */
+    font-weight: 400; /* Peso da fonte */
+    resize: none; /* Desativa redimensionamento */
+}
+
+.contact-form .input-box textarea {
+    height: 14rem; /* Altura do textarea */
+}
+
+.contact-form .input-box input::placeholder, .contact-form .input-box textarea::placeholder {
+    color: var(--shadow-color); /* Cor do placeholder */
+}
+
+.contact-form .input-box input:focus, .contact-form .input-box textarea:focus {
+    border-bottom-color: var(--main-color); /* Cor da borda ao focar */
+}
+
+.contact-form .btn {
+    margin-top: 2rem; /* Margem acima do botão */
+}
+
+.contact-form .input-box span {
+    position: absolute; /* Posicionamento absoluto */
+    left: 0; /* Posiciona à esquerda */
+    font-size: 1.6rem; /* Tamanho da fonte do texto */
+    font-weight: 400; /* Peso da fonte */
+    pointer-events: none; /* Desativa eventos de ponteiro */
+    transition: .5s; /* Transição suave */
+    color: var(--text-color); /* Cor do texto */
+}
+
+.input-box input:focus~span, .input-box input:valid~span, .input-box textarea:focus~span, .input-box textarea:valid~span {
+    transform: translateY(-20px); /* Efeito de movimento */
+    font-size: 1.4rem; /* Tamanho da fonte do texto */
+    font-weight: 500; /* Peso da fonte */
+}
+
+.footer {
+    background: var(--bg-color); /* Cor de fundo do rodapé */
+    padding: 2rem 7%; /* Preenchimento do rodapé */
+    text-align: center; /* Alinha o texto ao centro */
+    position: relative; /* Posicionamento relativo */
+    overflow: hidden; /* Oculta o conteúdo excedente */
+}
+
+.footer h2 {
+    color: var(--text-color); /* Cor do título */
+    font-weight: 600; /* Peso da fonte */
+    font-size: 2.2rem; /* Tamanho da fonte do título */
+}
+
+.footer p {
+    margin: 1rem 0 2.5rem; /* Margem ao redor do texto */
+    font-size: 1.6rem; /* Tamanho da fonte do texto */
+    color: var(--text-color); /* Cor do texto */
+    line-height: 1.8; /* Espaçamento entre linhas */
+}
+
+.footer .share a {
+    display: inline-block; /* Exibe como bloco em linha */
+    height: 4rem; /* Altura do link */
+    width: 4rem; /* Largura do link */
+    line-height: 4rem; /* Altura da linha */
+    background: transparent; /* Cor de fundo transparente */
+    border: .2rem solid var(--main-color); /* Borda do link */
+    color: var(--main-color); /* Cor do link */
+    margin: 0 .3rem; /* Margem ao redor do link */
+    border-radius: .5rem; /* Arredonda o link */
+    font-size: 2rem; /* Tamanho da fonte do link */
+    transition: .5s ease; /* Transição suave */
+}
+
+.footer .share a:hover {
+    background: var(--main-color); /* Cor de fundo do link ao passar o mouse */
+    color: var(--white-color); /* Cor do link ao passar o mouse */
+}
+
+.footer .credit {
+    margin: 2.5rem 0 1.5rem; /* Margem ao redor do crédito */
+    font-size: 1.6rem; /* Tamanho da fonte do crédito */
+    color: var(--text-color); /* Cor do crédito */
+    font-weight: 500; /* Peso da fonte */
+}
+
+.footer .credit span {
+    color: var(--main-color); /* Cor do crédito */
+}
+
+.footer .credit a {
+    color: var(--main-color); /* Cor do link */
+    font-weight: 600; /* Peso da fonte */
+}
+
+.footer .credit a:hover {
+    text-decoration: underline; /* Sublinhado ao passar o mouse */
+}
+
+.footer .wave {
+    position: absolute; /* Posicionamento absoluto */
+    top: -100%; /* Posiciona acima */
+    left: 0; /* Posiciona à esquerda */
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+    background: url(/path/to/wave.png) repeat-x; /* Imagem de fundo */
+    background-size: 1000px 100%; /* Tamanho da imagem */
+    animation: animate 30s linear infinite; /* Animação */
+    opacity: .5; /* Opacidade */
+    transform: rotate(180deg) scaleX(-1); /* Rotação e reflexão */
+    pointer-events: none; /* Desativa eventos de ponteiro */
+}
+
+@keyframes animate {
+    0% {
+        background-position-x: 0; /* Posiciona a imagem no início */
+    }
+
+    100% {
+        background-position-x: 1000px; /* Posiciona a imagem no final */
+    }
+}
+
+.footer .wave.wave1 {
+    z-index: 1; /* Coloca acima de outros elementos */
+    opacity: .2; /* Opacidade */
+    animation: animate 60s linear infinite; /* Animação */
+}
+
+.footer .wave.wave2 {
+    z-index: 2; /* Coloca acima de outros elementos */
+    opacity: .4; /* Opacidade */
+    animation: animate 30s linear infinite; /* Animação */
+}
+
+.footer .wave.wave3 {
+    z-index: 3; /* Coloca acima de outros elementos */
+    opacity: .6; /* Opacidade */
+    animation: animate 15s linear infinite; /* Animação */
+}
+
+@media (max-width: 991px) {
+    html {
+        font-size: 55%; /* Reduz o tamanho da fonte */
+    }
+
+    .header {
+        padding: 2rem; /* Reduz o preenchimento do cabeçalho */
+    }
+
+    section {
+        padding: 10rem 2rem; /* Reduz o preenchimento da seção */
+    }
+
+    .home .home-content {
+        max-width: 80%; /* Reduz a largura do conteúdo da home */
+    }
+
+    .home .home-img img {
+        max-width: 320px; /* Reduz a largura da imagem da home */
+        max-height: 85vh; /* Reduz a altura da imagem da home */
+        right: -40px; /* Move a imagem para a esquerda */
+    }
+
+    .about-content h2 {
+        text-align: center; /* Alinha o subtítulo ao centro */
+    }
+
+    .about-img img {
+        width: 50vw; /* Reduz a largura da imagem da about */
+    }
+
+    .services-container .services-box {
+        flex: 1 1 40rem; /* Reduz o tamanho do box */
+    }
+
+    .portfolio .portfolio-container .portfolio-box img {
+        width: 90%; /* Reduz a largura da imagem do portfolio */
+        margin: 0 auto; /* Centraliza a imagem do portfolio */
+    }
+
+    .portfolio .portfolio-container .portfolio-box:hover img {
+        transform: scale(1); /* Desativa o efeito de zoom */
+    }
+}
+
+@media (max-width: 768px) {
+    #menu-icon {
+        padding: 1rem; /* Reduz o preenchimento do ícone de menu */
+        display: block; /* Exibe o ícone de menu */
+    }
+
+    .navbar {
+        position: absolute; /* Posicionamento absoluto */
+        top: -400px; /* Posiciona abaixo */
+        left: 0; /* Posiciona à esquerda */
+        width: 100%; /* Largura total */
+        background: var(--bg-color); /* Cor de fundo do menu */
+        transition: .3s; /* Transição suave */
+    }
+
+    .header.sticky .navbar {
+        top: -500px; /* Posiciona abaixo */
+    }
+
+    .navbar.active {
+        top: 100%; /* Posiciona acima */
+    }
+
+    .navbar a {
+        display: block; /* Exibe como bloco */
+        margin: 2.5rem; /* Margem ao redor do link */
+        text-align: center; /* Alinha o texto ao centro */
+    }
+
+    section {
+        padding: 20rem 2rem; /* Reduz o preenchimento da seção */
+    }
+
+    .about-img img {
+        display: none; /* Oculta a imagem da about */
+    }
+}
+
+@media (max-width: 600px) {
+    html {
+        font-size: 50%; /* Reduz o tamanho da fonte */
+    }
+
+    .navbar a {
+        margin-right: 0; /* Remove a margem à direita */
+        margin-bottom: 3rem; /* Reduz a margem abaixo */
+        font-size: 2rem; /* Reduz o tamanho da fonte */
+    }
+
+    .navbar a:last-child {
+        margin-bottom: 0; /* Remove a margem abaixo */
+    }
+
+    .home .home-content {
+        max-width: 100%; /* Reduz a largura do conteúdo da home */
+    }
+
+    .home .profession-container {
+        width: 200%; /* Reduz a largura do container */
+        height: 200%; /* Reduz a altura do container */
+        right: -25%; /* Move o container para a esquerda */
+        top: -40%; /* Move o container para cima */
+    }
+
+    .home .profession-box .circle {
+        width: 360px; /* Reduz a largura do círculo */
+        height: 360px; /* Reduz a altura do círculo */
+    }
+
+    .home .profession-box h3 {
+        font-size: 2rem; /* Reduz o tamanho da fonte do título */
+    }
+
+    .about-img img {
+        display: none; /* Oculta a imagem da about */
+    }
+
+    .about-content h2 {
+        font-size: 3rem; /* Reduz o tamanho da fonte do subtítulo */
+    }
+
+    .about-content p {
+        font-size: 1.4rem; /* Reduz o tamanho da fonte do texto */
+    }
+
+    .about-content .btn {
+        font-size: 1.6rem; /* Reduz o tamanho da fonte do botão */
+    }
+
+    .services-container .services-box {
+        padding: 4rem 2rem; /* Reduz o preenchimento do box */
+        margin: 0; /* Remove a margem */
+    }
+
+    .services-container .services-box i {
+        font-size: 3rem; /* Reduz o tamanho da fonte do ícone */
+    }
+
+    .services-container .services-box h3 {
+        font-size: 1.8rem; /* Reduz o tamanho da fonte do título */
+    }
+
+    .services-container .services-box p {
+        font-size: 1.4rem; /* Reduz o tamanho da fonte do texto */
+    }
+
+    .portfolio .portfolio-container .portfolio-box img {
+        width: 90%; /* Reduz a largura da imagem do portfolio */
+        margin: 0 auto; /* Centraliza a imagem do portfolio */
+    }
+
+    .portfolio .portfolio-container .portfolio-box:hover img {
+        transform: scale(1); /* Desativa o efeito de zoom */
+    }
+
+    .contact-form {
+        margin: 0; /* Remove a margem */
+        padding: 2rem 1rem; /* Reduz o preenchimento do formulário */
+    }
+
+    .contact-form h3 {
+        font-size: 2rem; /* Reduz o tamanho da fonte do título */
+    }
+
+    .footer h2 {
+        font-size: 2rem; /* Reduz o tamanho da fonte do título */
+    }
+
+    .footer p {
+        font-size: 1.4rem; /* Reduz o tamanho da fonte do texto */
+    }
+
+    .footer .share a {
+        height: 3.5rem; /* Reduz a altura do link */
+        width: 3.5rem; /* Reduz a largura do link */
+        line-height: 3.5rem; /* Reduz a altura da linha */
+        font-size: 1.8rem; /* Reduz o tamanho da fonte do link */
+    }
+
+    .footer .credit {
+        font-size: 1.4rem; /* Reduz o tamanho da fonte do crédito */
+    }
+}
